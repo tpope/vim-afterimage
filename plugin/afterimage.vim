@@ -1,7 +1,6 @@
 " afterimage.vim - Edit binary files by converting them to text
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 
-" Inspired by gzip.vim.
 " Licensed under the same terms as Vim itself.
 
 if exists("loaded_afterimage") || &cp
