@@ -19,15 +19,15 @@
 " The easiest way to provide custom handlers is to learn from the examples in
 " the autocmd section below.  Briefly:
 "
-" The SmartReadPost function should be called from a BufReadPost,FileReadPost
+" AfterimageReadPost() should be called from a BufReadPost,FileReadPost
 " autocmd, with the argument being a string containing the command to run.
 " The source and destination files should each be replaced by %s and must
 " appear in that order.  If this function returns true, that means that an
 " entire file was successfully converted, and that it is appropriate to issue
 " commands like "set readonly" or "setf myfiletype".
 "
-" The SmartWriteCmd function should be called from a BufWriteCmd,FileWriteCmd
-" autocmd.  The argument is a command in the same format SmartReadPost
+" AfterimageWriteCmd() should be called from a BufWriteCmd,FileWriteCmd
+" autocmd.  The argument is a command in the same format AfterimageReadPost()
 " requires.
 "
 " Don't forget to setlocal binary in a BufReadPre,FileReadPre autocmd if the
@@ -43,24 +43,24 @@ endif
 let g:loaded_afterimage = 1
 
 augroup afterimage
-  au!
+  autocmd!
 
   if !exists("#BufWriteCmd#*.png")
     autocmd BufReadPre,FileReadPre    *.png,*.gif  setlocal bin
-    autocmd BufReadPost,FileReadPost  *.png,*.gif  if SmartReadPost("convert %s xpm:%s")|setf xpm|endif|setlocal nobin
-    autocmd BufWriteCmd,FileWriteCmd  *.png call SmartWriteCmd("convert %s png:%s")
-    autocmd BufWriteCmd,FileWriteCmd  *.gif call SmartWriteCmd("convert %s gif:%s")
+    autocmd BufReadPost,FileReadPost  *.png,*.gif  if AfterimageReadPost("convert %s xpm:%s")|setf xpm|endif|setlocal nobin
+    autocmd BufWriteCmd,FileWriteCmd  *.png call AfterimageWriteCmd("convert %s png:%s")
+    autocmd BufWriteCmd,FileWriteCmd  *.gif call AfterimageWriteCmd("convert %s gif:%s")
   endif
 
   if !exists("#BufWriteCmd#*.pdf")
     autocmd BufReadPre,FileReadPre    *.pdf setlocal bin
-    autocmd BufReadPost,FileReadPost  *.pdf call SmartReadPost("pdftk %s output %s uncompress")
-    autocmd BufWriteCmd,FileWriteCmd  *.pdf call SmartWriteCmd("pdftk %s output %s compress")
+    autocmd BufReadPost,FileReadPost  *.pdf call AfterimageReadPost("pdftk %s output %s uncompress")
+    autocmd BufWriteCmd,FileWriteCmd  *.pdf call AfterimageWriteCmd("pdftk %s output %s compress")
   endif
 
   if !exists("#BufReadPre#*.doc")
     autocmd BufReadPre,FileReadPre    *.doc setlocal bin
-    autocmd BufReadPost,FileReadPost  *.doc if SmartReadPost("antiword %s > %s") | setlocal readonly | endif
+    autocmd BufReadPost,FileReadPost  *.doc if AfterimageReadPost("antiword %s > %s") | setlocal readonly | endif
   endif
 
   if !exists("#BufWriteCmd#*.plist")
@@ -98,10 +98,10 @@ endfunction
 
 " }}}1
 
-function! SmartReadPost(cmd) " {{{1
-  " SmartReadPost() returns true if the process was successful *and* if it was
-  " an entire file that was converted.  This is a good condition on which to
-  " do things like setting the filetype.
+function! AfterimageReadPost(cmd) " {{{1
+  " AfterimageReadPost() returns true if the process was successful *and* if
+  " it was an entire file that was converted.  This is a good condition on
+  " which to do things like setting the filetype.
   if !s:check(a:cmd)
     return 0
   endif
@@ -154,7 +154,7 @@ function! SmartReadPost(cmd) " {{{1
   return empty
 endfunction " }}}1
 
-function! SmartWriteCmd(cmd) " {{{1
+function! AfterimageWriteCmd(cmd) " {{{1
   " don't do anything if the cmd is not supported
   if s:check(a:cmd)
     let nm = expand("<afile>")
@@ -186,7 +186,7 @@ function! s:readplist()
     return
   endif
   let b:plist_format = "binary1"
-  if SmartReadPost("plutil -convert xml1 %s -o %s")
+  if AfterimageReadPost("plutil -convert xml1 %s -o %s")
     setf xml
     return 1
   else
@@ -203,7 +203,7 @@ endfunction
 
 function! s:writeplist()
   if exists("b:plist_format")
-    call SmartWriteCmd("plutil -convert ".b:plist_format." %s -o %s")
+    call AfterimageWriteCmd("plutil -convert ".b:plist_format." %s -o %s")
     " I don't know why this is sometimes necessary
     "if &ft == "xml"
       "let &syn = &ft
