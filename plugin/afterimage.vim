@@ -1,6 +1,5 @@
 " afterimage.vim - binary formatted file conversions
-" Author: Tim Pope <vimNOSPAM@tpope.info>
-" $Id$
+" Author: Tim Pope <vimNOSPAM@tpope.org>
 
 " Inspired by gzip.vim.
 " Licensed under the same terms as Vim itself.
