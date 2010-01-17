@@ -1,41 +1,8 @@
-" afterimage.vim - binary formatted file conversions
-" Author: Tim Pope <vimNOSPAM@tpope.org>
+" afterimage.vim - Edit binary files by converting them to text
+" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 
 " Inspired by gzip.vim.
 " Licensed under the same terms as Vim itself.
-
-" Builtins:
-"
-" PNGs and GIFs are converted to/from XPM with ImageMagick.
-"
-" PDFs are uncompressed/recompressed with pdftk.
-"
-" Word documents are decoded (one way) with antiword.
-"
-" OS X plists are converted to from XML with plutil.
-"
-" Customization:
-"
-" The easiest way to provide custom handlers is to learn from the examples in
-" the autocmd section below.  Briefly:
-"
-" AfterimageReadPost() should be called from a BufReadPost,FileReadPost
-" autocmd, with the argument being a string containing the command to run.
-" The source and destination files should each be replaced by %s and must
-" appear in that order.  If this function returns true, that means that an
-" entire file was successfully converted, and that it is appropriate to issue
-" commands like "set readonly" or "setf myfiletype".
-"
-" AfterimageWriteCmd() should be called from a BufWriteCmd,FileWriteCmd
-" autocmd.  The argument is a command in the same format AfterimageReadPost()
-" requires.
-"
-" Don't forget to setlocal binary in a BufReadPre,FileReadPre autocmd if the
-" file is in fact binary.
-"
-" The customization interface is experimental and subject to change.  If you
-" have a customization you think others could use, feel free to submit it to
-" the author of this plugin.
 
 if exists("loaded_afterimage") || &cp
   finish
