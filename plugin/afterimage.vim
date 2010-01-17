@@ -1,4 +1,4 @@
-" imagemagick.vim - binary formatted file conversions
+" afterimage.vim - binary formatted file conversions
 " Author: Tim Pope <vimNOSPAM@tpope.info>
 " $Id$
 
@@ -38,15 +38,12 @@
 " have a customization you think others could use, feel free to submit it to
 " the author of this plugin.
 
-" Exit quickly when:
-" - this plugin was already loaded
-" - when 'compatible' is set
-if exists("loaded_imagemagick") || &cp
+if exists("loaded_afterimage") || &cp
   finish
 endif
-let loaded_imagemagick = 1
+let g:loaded_afterimage = 1
 
-augroup imagemagick
+augroup afterimage
   au!
 
   if !exists("#BufWriteCmd#*.png")
