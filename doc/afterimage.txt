@@ -5,7 +5,6 @@ License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
 
-==============================================================================
 BUILT-INS                                       *afterimage-built-ins*
 
 PNGs and GIFs are converted to/from XPM with ImageMagick.  XPM is a plain text
@@ -20,7 +19,6 @@ Word documents have their text extracted (one way) with antiword.
 
 OS X binary plists are converted to/from XML with plutil.
 
-==============================================================================
 CUSTOMIZATION                                   *afterimage-customization*
 
 The easiest way to provide custom handlers is to learn from the source to the
