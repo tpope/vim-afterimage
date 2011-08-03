@@ -13,10 +13,12 @@ augroup afterimage
   autocmd!
 
   if !exists("#BufWriteCmd#*.png")
-    autocmd BufReadPre,FileReadPre    *.png,*.gif  setlocal bin
-    autocmd BufReadPost,FileReadPost  *.png,*.gif  if AfterimageReadPost("convert %s xpm:%s")|set ft=xpm|endif|setlocal nobin
+    autocmd BufReadPre,FileReadPre    *.png,*.gif,*.ico  setlocal bin
+    autocmd BufReadPost,FileReadPost  *.png,*.gif        if AfterimageReadPost("convert %s xpm:%s")|set ft=xpm|endif|setlocal nobin
+    autocmd BufReadPost,FileReadPost  *.ico              if AfterimageReadPost("convert ico:%s xpm:%s")|set ft=xpm|endif|setlocal nobin
     autocmd BufWriteCmd,FileWriteCmd  *.png call AfterimageWriteCmd("convert %s png:%s")
     autocmd BufWriteCmd,FileWriteCmd  *.gif call AfterimageWriteCmd("convert %s gif:%s")
+    autocmd BufWriteCmd,FileWriteCmd  *.ico call AfterimageWriteCmd("convert %s ico:%s")
   endif
 
   if !exists("#BufWriteCmd#*.pdf")
@@ -88,7 +90,7 @@ function! AfterimageReadPost(cmd) " {{{1
   " write the just read lines to a temp file
   execute "silent '[,']w " . tmp1
   " convert the temp file, modified for imagemagick
-  call system(printf(a:cmd,s:esc(tmp1),s:esc(tmp2)))
+  let g:error = system(printf(a:cmd,s:esc(tmp1),s:esc(tmp2)))
   " delete the binary lines; remember the line number
   let l = line("'[") - 1
   if exists(":lockmarks")
