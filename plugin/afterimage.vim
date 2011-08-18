@@ -1,5 +1,5 @@
 " afterimage.vim - Edit binary files by converting them to text
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
+" Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      2.1
 
 " Licensed under the same terms as Vim itself.
