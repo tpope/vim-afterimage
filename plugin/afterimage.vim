@@ -162,9 +162,10 @@ function! s:readplist()
 endfunction
 
 function! s:writeplist()
-  if exists("b:plist_format")
-    call AfterimageWriteCmd("plutil -convert ".b:plist_format." %s -o %s")
+  if !exists("b:plist_format")
+    let b:plist_format = "xml1"
   endif
+  call AfterimageWriteCmd("plutil -convert ".b:plist_format." %s -o %s")
 endfunction
 
 " }}}1
