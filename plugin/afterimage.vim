@@ -124,7 +124,6 @@ function! AfterimageReadPost(cmd) " {{{1
 endfunction " }}}1
 
 function! AfterimageWriteCmd(cmd) " {{{1
-  " don't do anything if the cmd is not supported
   if s:check(a:cmd)
     let nm = expand("<afile>")
     let tmp1 = tempname()
@@ -149,7 +148,6 @@ endfunction " }}}1
 
 function! s:readplist()
   if getline(1) =~ '<?xml\>'
-    " If already XML, make a note and exit
     let b:plist_format = "xml1"
     setlocal nobin
     return
@@ -161,22 +159,11 @@ function! s:readplist()
   else
     return 0
   endif
-
-  " When converted the whole buffer, do autocommands
-  "if &verbose >= 8
-    "execute         "doau BufReadPost " . expand("%:r") . ".xml"
-  "else
-    "execute "silent! doau BufReadPost " . expand("%:r") . ".xml"
-  "endif
 endfunction
 
 function! s:writeplist()
   if exists("b:plist_format")
     call AfterimageWriteCmd("plutil -convert ".b:plist_format." %s -o %s")
-    " I don't know why this is sometimes necessary
-    "if &ft == "xml"
-      "let &syn = &ft
-    "endif
   endif
 endfunction
 
