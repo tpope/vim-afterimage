@@ -90,7 +90,7 @@ function! AfterimageReadPost(cmd) " {{{1
   " write the just read lines to a temp file
   execute "silent '[,']w " . tmp1
   " convert the temp file, modified for imagemagick
-  let g:error = system(printf(a:cmd,s:esc(tmp1),s:esc(tmp2)))
+  call system(printf(a:cmd,s:esc(tmp1),s:esc(tmp2)))
   " delete the binary lines; remember the line number
   let l = line("'[") - 1
   if exists(":lockmarks")
