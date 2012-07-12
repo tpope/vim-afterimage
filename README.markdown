@@ -17,6 +17,10 @@ Oh, and it can also handle PDFs (with
 Word Documents (read-only, with [Antiword](http://www.winfield.demon.nl/)),
 and Mac OS X plist files.
 
+If you are more scientifically inclined it also lets you edit
+[NetCDF](http://www.opengeospatial.org/standards/netcdf) files in their
+CDL form.
+
 Installation
 ------------
 

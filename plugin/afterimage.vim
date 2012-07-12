@@ -21,6 +21,13 @@ augroup afterimage
     autocmd BufWriteCmd,FileWriteCmd  *.ico call AfterimageWriteCmd("convert %s ico:%s")
   endif
 
+  " Convert NetCDF files to cdl for editing (http://www.unidata.ucar.edu/software/netcdf/)
+  if !exists("#BufWriteCmd#*.nc")
+    autocmd BufReadPre,FileReadPre    *.nc setlocal bin
+    autocmd BufReadPost,FileReadPost  *.nc if AfterimageReadPost("ncdump %s >%s") | set ft=c | endif
+    autocmd BufWriteCmd,FileWriteCmd  *.nc call AfterimageWriteCmd("cat %s | ncgen -o %s")
+  endif
+
   if !exists("#BufWriteCmd#*.pdf")
     autocmd BufReadPre,FileReadPre    *.pdf setlocal bin
     autocmd BufReadPost,FileReadPost  *.pdf call AfterimageReadPost("pdftk %s output %s uncompress")
