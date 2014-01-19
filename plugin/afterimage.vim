@@ -13,12 +13,13 @@ augroup afterimage
   autocmd!
 
   if !exists("#BufWriteCmd#*.png")
-    autocmd BufReadPre,FileReadPre    *.png,*.gif,*.ico  setlocal bin
-    autocmd BufReadPost,FileReadPost  *.png,*.gif        if AfterimageReadPost("convert %s xpm:%s")|set ft=xpm|endif|setlocal nobin
+    autocmd BufReadPre,FileReadPre    *.png,*.gif,*.bmp,*.ico  setlocal bin
+    autocmd BufReadPost,FileReadPost  *.png,*.gif,*.bmp  if AfterimageReadPost("convert %s xpm:%s")|set ft=xpm|endif|setlocal nobin
     autocmd BufReadPost,FileReadPost  *.ico              if AfterimageReadPost("convert ico:%s xpm:%s")|set ft=xpm|endif|setlocal nobin
     autocmd BufWriteCmd,FileWriteCmd  *.png call AfterimageWriteCmd("convert %s png:%s")
     autocmd BufWriteCmd,FileWriteCmd  *.gif call AfterimageWriteCmd("convert %s gif:%s")
     autocmd BufWriteCmd,FileWriteCmd  *.ico call AfterimageWriteCmd("convert %s ico:%s")
+    autocmd BufWriteCmd,FileWriteCmd  *.bmp call AfterimageWriteCmd("convert %s bmp:%s")
   endif
 
   if !exists("#BufWriteCmd#*.pdf")

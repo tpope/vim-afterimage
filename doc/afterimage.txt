@@ -7,10 +7,11 @@ This plugin is only available if 'compatible' is not set.
 
 BUILT-INS                                       *afterimage-built-ins*
 
-PNGs and GIFs are converted to/from XPM with ImageMagick.  XPM is a plain text
-format that resembles a C header.  GUI versions of Vim will actually syntax
-highlight the image data to resemble the original.  While no replacement for a
-real image editor, this built-in can and has been used to tweak small icons.
+PNGs, BMPs and GIFs are converted to/from XPM with ImageMagick.  XPM is a
+plain text format that resembles a C header.  GUI versions of Vim will
+actually syntax highlight the image data to resemble the original.  While no
+replacement for a real image editor, this built-in can and has been used to
+tweak small icons.
 
 PDFs are uncompressed/recompressed with pdftk.  Even when decompressed, PDFs
 are partially a binary format, so this is mostly a novelty.
