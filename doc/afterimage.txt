@@ -20,6 +20,9 @@ Word documents have their text extracted (one way) with antiword.
 
 OS X binary plists are converted to/from XML with plutil.
 
+NetCDF files are converted to CDL with ncdump for editing and back to NetCDF
+with ncgen
+
 CUSTOMIZATION                                   *afterimage-customization*
 
 The easiest way to provide custom handlers is to learn from the source to the
